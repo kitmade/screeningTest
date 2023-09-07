@@ -1,3 +1,5 @@
+import {Doctor} from './data';
+
 export enum ScreenName {
   Home = 'Home',
   Intro = 'Intro',
@@ -14,7 +16,7 @@ export type MainParamList = {
   [ScreenName.Intro]: undefined;
   [ScreenName.Home]: undefined;
   [ScreenName.DoctorsDirectory]: undefined;
-  [ScreenName.AppointmentVideo]: undefined;
+  [ScreenName.AppointmentVideo]: {doctorInfo: Doctor};
   [ScreenName.MedicationDetail]: undefined;
 };
 

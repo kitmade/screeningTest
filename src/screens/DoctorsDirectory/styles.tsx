@@ -23,4 +23,5 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     height: '100%',
   },
+  header: {borderBottomWidth: 1},
 });

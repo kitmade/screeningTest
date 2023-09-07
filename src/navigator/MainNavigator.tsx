@@ -4,6 +4,7 @@ import {MainParamList, ScreenName} from '../type/navigator';
 import {
   AppointmentVideoScreen,
   DoctorsDirectoryScreen,
+  HomeScreen,
   IntroScreen,
   MedicationDetailScreen,
 } from '../screens';
@@ -36,6 +37,7 @@ const MainNavigator = ({}: MainNavigatorProps) => {
       initialRouteName={ScreenName.Intro}
       screenOptions={{headerShown: false}}>
       <MainStack.Screen name={ScreenName.Intro} component={IntroScreen} />
+      <MainStack.Screen name={ScreenName.Home} component={HomeScreen} />
       <MainStack.Screen
         name={ScreenName.MedicationDetail}
         component={MedicationDetailScreen}

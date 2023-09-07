@@ -17,7 +17,6 @@ const Switch = ({
 }: SwitchProps) => {
   const [isSwitched, setSwitched] = useState(false);
   const thumbValue = useRef(new Animated.Value(0));
-
   const onSwitchPress = () => {
     setSwitched(prev => {
       thumbAnimation(prev ? 0 : 1);

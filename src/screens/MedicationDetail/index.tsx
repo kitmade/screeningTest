@@ -43,7 +43,7 @@ const MedicationDetail = ({}: MedicationDetailProps) => {
         <Section
           label="Finish course"
           labelBold
-          LeftElement={<FontAwesome5 name="calendar-times" />}
+          LeftElement={<FontAwesome5 name="calendar-times" solid size={14} />}
           RightElement={<DatePicker />}
         />
       </ScrollView>

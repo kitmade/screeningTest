@@ -1,30 +1,27 @@
 import * as React from 'react';
-import {Text, View, FlatList, Pressable, TextInput} from 'react-native';
+import {Text, View, FlatList, Pressable} from 'react-native';
 import {Screen} from 'react-native-screens';
-import {Header} from '../../components';
+import {Avatar, Header, TextInput} from '../../components';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styles} from './styles';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {MainParamList, ScreenName} from '../../type/navigator';
+import {Doctor} from '../../type/data';
+import {Images} from '../../assets';
+import {doctors} from '../../utils/data';
 
 interface DoctorsDirectoryScreenProps {}
 
-type Doctor = {
-  id: number;
-  name: string;
-  roles: string[];
-};
+const DoctorRow = ({...doctorInfo}: Doctor) => {
+  const {avatar, name, roles} = doctorInfo;
+  const {navigate} = useNavigation<NavigationProp<MainParamList>>();
+  const onRowPress = () => {
+    navigate(ScreenName.AppointmentVideo, {doctorInfo});
+  };
 
-const doctors = [
-  {id: 1, name: 'Dr.Lucas', roles: ['Dentist', 'Dental hygiene']},
-  {id: 2, name: 'Dr.Matthew', roles: ['Dental hygiene']},
-  {id: 3, name: 'Dr.Greg', roles: ['Ortodontist']},
-  {id: 4, name: 'Dr.Eva', roles: ['Dentist', 'Dental hygiene']},
-  {id: 5, name: 'Dr.Anna', roles: ['Dentist']},
-] as Doctor[];
-
-const DoctorRow = ({name, roles}: Doctor) => {
   return (
-    <Pressable style={styles.doctorRowContainer}>
-      <View style={styles.doctocPic} />
+    <Pressable style={styles.doctorRowContainer} onPress={onRowPress}>
+      <Avatar isSquare source={{uri: avatar}} />
       <View style={styles.doctorInfoContainer}>
         <Text style={styles.doctorName}>{name}</Text>
         <Text>
@@ -39,36 +36,30 @@ const DoctorRow = ({name, roles}: Doctor) => {
 };
 
 const DoctorsDirectoryScreen = ({}: DoctorsDirectoryScreenProps) => {
+  const [search, setSearch] = React.useState('');
+
+  const fitleredDoctors = React.useMemo(
+    () =>
+      search.length === 0
+        ? doctors
+        : doctors.filter(({name}) =>
+            name.toLowerCase().includes(search.toLowerCase()),
+          ),
+    [search],
+  );
+
   return (
     <Screen>
       <Header
-        containerStyle={{borderBottomWidth: 1}}
+        containerStyle={styles.header}
         MiddleElement={
-          <TextInput
-            placeholder="Dentists"
-            style={{
-              backgroundColor: 'white',
-              flex: 1,
-              paddingHorizontal: 8,
-              borderRadius: 6,
-            }}
-          />
+          <TextInput placeholder="Dentists" onChangeText={setSearch} />
         }
-        RightElement={
-          <View
-            style={{
-              height: 36,
-              width: 36,
-              borderRadius: 36,
-              backgroundColor: 'red',
-              marginLeft: 8,
-            }}
-          />
-        }
+        RightElement={<Avatar source={{uri: Images.userCallImage}} />}
       />
 
       <FlatList
-        data={doctors}
+        data={fitleredDoctors}
         renderItem={({item}) => <DoctorRow {...item} />}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.doctorListContentContainer}

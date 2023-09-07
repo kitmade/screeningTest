@@ -36,7 +36,7 @@ const Header = ({
         <MaterialCommunityIcons name="chevron-left" size={25} />
       </TouchableOpacity>
       <View style={styles.centerContainer}>
-        {MiddleElement ?? <Text>{label}</Text>}
+        {MiddleElement ?? <Text style={styles.labelTxt}>{label}</Text>}
       </View>
       <View style={styles.sideContainer}>{RightElement}</View>
     </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   sideContainer: {
-    // flex: 1.5,
+    flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
   },
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
     flex: 7,
     justifyContent: 'center',
     // alignItems: 'center',
-    textAlign: 'center',
   },
+  labelTxt: {textAlign: 'center'},
 });
