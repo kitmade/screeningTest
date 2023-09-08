@@ -32,13 +32,15 @@ const Header = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <TouchableOpacity onPress={onBackPress} style={styles.sideContainer}>
+      <TouchableOpacity
+        onPress={onBackPress}
+        style={[styles.sideContainer, styles.left]}>
         <MaterialCommunityIcons name="chevron-left" size={25} />
       </TouchableOpacity>
       <View style={styles.centerContainer}>
         {MiddleElement ?? <Text style={styles.labelTxt}>{label}</Text>}
       </View>
-      <View style={styles.sideContainer}>{RightElement}</View>
+      <View style={[styles.sideContainer, styles.right]}>{RightElement}</View>
     </View>
   );
 };
@@ -55,13 +57,12 @@ const styles = StyleSheet.create({
   },
   sideContainer: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
+  left: {alignItems: 'flex-start'},
+  right: {alignItems: 'flex-end'},
   centerContainer: {
     flex: 7,
     justifyContent: 'center',
-    // alignItems: 'center',
   },
   labelTxt: {textAlign: 'center'},
 });

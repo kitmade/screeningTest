@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   medicationName: {
     fontWeight: 'bold',
     fontSize: 24,
+    marginBottom: 24,
   },
   contentContainer: {
     paddingHorizontal: 8,

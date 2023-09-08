@@ -25,5 +25,5 @@ const RootNavigator = ({}: RootNavigatorProps) => {
 export default RootNavigator;
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {flex: 1, backgroundColor: 'rgb(244,244,244)'},
 });
