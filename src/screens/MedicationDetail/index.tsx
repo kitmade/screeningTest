@@ -25,7 +25,7 @@ const MedicationDetail = ({}: MedicationDetailProps) => {
   };
 
   return (
-    <Screen>
+    <Screen withSafeView>
       <Header />
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.topContentArea}>

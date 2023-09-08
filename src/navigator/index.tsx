@@ -13,11 +13,11 @@ const RootNavigator = ({}: RootNavigatorProps) => {
   return (
     <NavigationContainer>
       <StatusBar />
-      <SafeAreaView style={styles.container}>
-        <RootStack.Navigator screenOptions={{headerShown: false}}>
-          <RootStack.Screen name={StackName.Main} component={MainNavigator} />
-        </RootStack.Navigator>
-      </SafeAreaView>
+      {/* <SafeAreaView style={styles.container}> */}
+      <RootStack.Navigator screenOptions={{headerShown: false}}>
+        <RootStack.Screen name={StackName.Main} component={MainNavigator} />
+      </RootStack.Navigator>
+      {/* </SafeAreaView> */}
     </NavigationContainer>
   );
 };

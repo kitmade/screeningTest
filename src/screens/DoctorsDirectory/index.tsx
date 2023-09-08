@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {Text, View, FlatList, Pressable} from 'react-native';
-import {Screen} from 'react-native-screens';
-import {Avatar, Header, TextInput} from '../../components';
+import {Avatar, Header, Screen, TextInput} from '../../components';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styles} from './styles';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {MainParamList, ScreenName} from '../../type/navigator';
 import {Doctor} from '../../type/data';
 import {Images} from '../../assets';
-import {doctors} from '../../utils/data';
+// import {doctors} from '../../utils/data';
+import {getDoctors} from '../../services/doctors';
 
 interface DoctorsDirectoryScreenProps {}
 
@@ -36,30 +36,35 @@ const DoctorRow = ({...doctorInfo}: Doctor) => {
 };
 
 const DoctorsDirectoryScreen = ({}: DoctorsDirectoryScreenProps) => {
-  const [search, setSearch] = React.useState('');
+  const [doctors, setDoctors] = React.useState<Doctor[]>([]);
 
-  const fitleredDoctors = React.useMemo(
-    () =>
-      search.length === 0
-        ? doctors
-        : doctors.filter(({name}) =>
-            name.toLowerCase().includes(search.toLowerCase()),
-          ),
-    [search],
-  );
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const res = await getDoctors();
+        setDoctors(res);
+      } catch (error) {
+        console.log('error', error);
+      }
+    })();
+  }, []);
+
+  const onSearchChange = async (text: string) => {
+    getDoctors(text).then(setDoctors);
+  };
 
   return (
-    <Screen>
+    <Screen withSafeView>
       <Header
         containerStyle={styles.header}
         MiddleElement={
-          <TextInput placeholder="Dentists" onChangeText={setSearch} />
+          <TextInput placeholder="Dentists" onChangeText={onSearchChange} />
         }
         RightElement={<Avatar source={{uri: Images.userCallImage}} />}
       />
 
       <FlatList
-        data={fitleredDoctors}
+        data={doctors}
         renderItem={({item}) => <DoctorRow {...item} />}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.doctorListContentContainer}

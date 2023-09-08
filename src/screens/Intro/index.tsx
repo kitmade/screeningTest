@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import {Images} from '../../assets';
-import {Button} from '../../components';
+import {Button, Screen} from '../../components';
 import {
   NavigationProp,
   StackActions,
@@ -19,7 +19,7 @@ const IntroScreen = ({}: IntroScreenProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen withSafeView>
       <View style={styles.logoArea}>
         <Image source={{uri: Images.appIcon}} style={styles.logo} />
         <Text style={{fontSize: 50, marginTop: 8}}>
@@ -28,7 +28,7 @@ const IntroScreen = ({}: IntroScreenProps) => {
         </Text>
       </View>
       <Button label="Start" onPress={onStartPress} atBottom />
-    </View>
+    </Screen>
   );
 };
 

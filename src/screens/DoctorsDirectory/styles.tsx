@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   doctocPic: {
     height: 36,
     width: 36,
-    backgroundColor: 'red',
     borderRadius: 8,
   },
   doctorInfoContainer: {flex: 1, paddingHorizontal: 8},

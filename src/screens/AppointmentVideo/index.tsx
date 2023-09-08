@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import {Images} from '../../assets';
-import {Header} from '../../components';
+import {Header, Screen} from '../../components';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import image from '../../assets/image';
 import {
@@ -64,37 +64,41 @@ const AppointmentVideoScreen = ({}: AppointmentVideoScreenProps) => {
     <ImageBackground
       source={{uri: avatar ?? Images.videoCallBackground}}
       style={styles.container}>
-      <Header />
-      <Image
-        source={{uri: image.userCallImage}}
-        style={styles.userVideoDisplay}
-      />
-      <View style={styles.inCalInfoContainer}>
-        <View style={styles.inCallInfoText}>
-          <Text style={[styles.inCallText, styles.nameText]}>
-            {name ?? 'Dr.Phil'}
-          </Text>
-          <Text style={styles.inCallText}>00:19:21</Text>
+      <Screen withSafeView transparent>
+        <Header />
+        <Image
+          source={{uri: image.userCallImage}}
+          style={styles.userVideoDisplay}
+        />
+        <View style={styles.inCalInfoContainer}>
+          <View style={styles.inCallInfoText}>
+            <Text style={[styles.inCallText, styles.nameText]}>
+              {name ?? 'Dr.Phil'}
+            </Text>
+            <Text style={styles.inCallText}>00:19:21</Text>
+          </View>
+          <View style={styles.inCallButtonContainer}>
+            <InCallButton
+              size={50}
+              backgroundColor={'rgb(133,133,144)'}
+              icon={
+                <FontAwesome5 size={15} name="microphone" color={'white'} />
+              }
+            />
+            <InCallButton
+              onPress={goBack}
+              backgroundColor={'rgb(238,87,74)'}
+              size={70}
+              icon={<FontAwesome5 size={35} name="phone-alt" color={'white'} />}
+            />
+            <InCallButton
+              backgroundColor={'rgb(133,133,144)'}
+              size={50}
+              icon={<FontAwesome5 size={15} name="video" color={'white'} />}
+            />
+          </View>
         </View>
-        <View style={styles.inCallButtonContainer}>
-          <InCallButton
-            size={50}
-            backgroundColor={'rgb(133,133,144)'}
-            icon={<FontAwesome5 size={15} name="microphone" color={'white'} />}
-          />
-          <InCallButton
-            onPress={goBack}
-            backgroundColor={'rgb(238,87,74)'}
-            size={70}
-            icon={<FontAwesome5 size={35} name="phone-alt" color={'white'} />}
-          />
-          <InCallButton
-            backgroundColor={'rgb(133,133,144)'}
-            size={50}
-            icon={<FontAwesome5 size={15} name="video" color={'white'} />}
-          />
-        </View>
-      </View>
+      </Screen>
     </ImageBackground>
   );
 };
